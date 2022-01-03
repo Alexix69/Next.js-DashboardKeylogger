@@ -1,7 +1,7 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
-import { Grid } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 import Layout from "../components/Layout";
 import ChartPie from "../components/ChartPie";
 import TableReports from "../components/TableReports";
@@ -12,23 +12,60 @@ export default function Home() {
       <Grid
         marginTop={10}
         container
-        spacing={0}
         direction="column"
         alignItems="center"
-        justify="center"
+        justifyContent="center"
       >
         <Grid
-        display="flex"
-        spacing={0}
-        alignItems="center"
-        justify="center"
-      >
-        <ChartPie />
-        <ChartPie />
-        <ChartPie />
-      </Grid>
-        
-        <TableReports/>
+          container
+          direction="row"
+          alignItems="center"
+          justifyContent="center"
+        >
+          <Grid item xs={4} sm={2} alignItems="center" justifyContent="center">
+            <Grid>
+              <ChartPie />
+            </Grid>
+            <Grid paddingY={1}>
+              <Typography align="center">Actividad</Typography>
+            </Grid>
+          </Grid>
+          <Grid item xs={4} sm={2} alignItems="center" justifyContent="center">
+            <Grid>
+              <ChartPie />
+            </Grid>
+            <Grid paddingY={1}>
+              <Typography align="center">Infectadas</Typography>
+            </Grid>
+          </Grid>
+          <Grid item xs={4} sm={2} alignItems="center" justifyContent="center">
+            <Grid>
+              <ChartPie />
+            </Grid>
+            <Grid paddingY={1}>
+              <Typography align="center">KeyStrokes</Typography>
+            </Grid>
+          </Grid>
+          <Grid item xs={4} sm={2} alignItems="center" justifyContent="center">
+            <Grid>
+              <ChartPie />
+            </Grid>
+            <Grid paddingY={1}>
+              <Typography align="center">Screen</Typography>
+            </Grid>
+          </Grid>
+          <Grid item xs={4} sm={2} alignItems="center" justifyContent="center">
+            <Grid>
+              <ChartPie />
+            </Grid>
+            <Grid paddingY={1}>
+              <Typography align="center">Web</Typography>
+            </Grid>
+          </Grid>
+        </Grid>
+        <Grid item xs={8} md={14} Width={300} marginTop={5}>
+          <TableReports />
+        </Grid>
       </Grid>
     </Layout>
   );

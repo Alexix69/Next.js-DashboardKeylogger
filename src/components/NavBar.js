@@ -134,7 +134,7 @@ export default function NavBar() {
                 open={open}
                 onClose={handleClose}
               >
-                <MenuItem onClick={handleClose} disableRipple>
+                <MenuItem onClick={() => push("/profile")} disableRipple>
                   <AdminPanelSettingsIcon />
                   Perfil
                 </MenuItem>
