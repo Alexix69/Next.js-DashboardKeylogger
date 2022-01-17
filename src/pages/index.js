@@ -1,72 +1,120 @@
 import * as React from "react";
+import Avatar from "@mui/material/Avatar";
+import Button from "@mui/material/Button";
+import CssBaseline from "@mui/material/CssBaseline";
+import TextField from "@mui/material/TextField";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Checkbox from "@mui/material/Checkbox";
 import Box from "@mui/material/Box";
-import Paper from "@mui/material/Paper";
-import { Grid, Typography } from "@mui/material";
-import Layout from "../components/Layout";
-import ChartPie from "../components/ChartPie";
-import TableReports from "../components/TableReports";
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import Typography from "@mui/material/Typography";
+import Container from "@mui/material/Container";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import Link from "next/link";
+import { useRouter } from "next/router";
 
-export default function Home() {
+function Copyright(props) {
+  const { push } = useRouter();
   return (
-    <Layout>
-      <Grid
-        marginTop={10}
-        container
-        direction="column"
-        alignItems="center"
-        justifyContent="center"
-      >
-        <Grid
-          container
-          direction="row"
-          alignItems="center"
-          justifyContent="center"
+    <Typography
+      variant="body2"
+      color="text.secondary"
+      align="center"
+      {...props}
+    >
+      Keylogger {new Date().getFullYear()}
+      {"."}
+    </Typography>
+  );
+}
+
+const theme = createTheme();
+
+export default function SignIn() {
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const data = new FormData(event.currentTarget);
+    // eslint-disable-next-line no-console
+    console.log({
+      email: data.get("email"),
+      password: data.get("password"),
+    });
+  };
+
+  return (
+    <ThemeProvider theme={theme}>
+      <Container component="main" maxWidth="xs">
+        <CssBaseline />
+        <Box
+          sx={{
+            marginTop: 8,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
         >
-          <Grid item xs={4} sm={2} alignItems="center" justifyContent="center">
-            <Grid>
-              <ChartPie />
-            </Grid>
-            <Grid paddingY={1}>
-              <Typography align="center">Actividad</Typography>
-            </Grid>
-          </Grid>
-          <Grid item xs={4} sm={2} alignItems="center" justifyContent="center">
-            <Grid>
-              <ChartPie />
-            </Grid>
-            <Grid paddingY={1}>
-              <Typography align="center">Infectadas</Typography>
-            </Grid>
-          </Grid>
-          <Grid item xs={4} sm={2} alignItems="center" justifyContent="center">
-            <Grid>
-              <ChartPie />
-            </Grid>
-            <Grid paddingY={1}>
-              <Typography align="center">KeyStrokes</Typography>
-            </Grid>
-          </Grid>
-          <Grid item xs={4} sm={2} alignItems="center" justifyContent="center">
-            <Grid>
-              <ChartPie />
-            </Grid>
-            <Grid paddingY={1}>
-              <Typography align="center">Screen</Typography>
-            </Grid>
-          </Grid>
-          <Grid item xs={4} sm={2} alignItems="center" justifyContent="center">
-            <Grid>
-              <ChartPie />
-            </Grid>
-            <Grid paddingY={1}>
-              <Typography align="center">Web</Typography>
-            </Grid>
-          </Grid>
-        </Grid>
-        <Grid item xs={8} md={14} Width={300} marginTop={5}>
-          <TableReports />
-        </Grid>
-      </Grid>
-    </Layout>
+          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+            <LockOutlinedIcon />
+          </Avatar>
+          <Typography component="h1" variant="h5">
+            Ingresar al Dashboard
+          </Typography>
+          <Box
+            component="form"
+            onSubmit={handleSubmit}
+            noValidate
+            sx={{ mt: 1 }}
+          >
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="email"
+              label="Identificacion"
+              name="email"
+              autoComplete="email"
+              autoFocus
+            />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              name="password"
+              label="Contraseña"
+              type="password"
+              id="password"
+              autoComplete="current-password"
+            />
+            <FormControlLabel
+              control={<Checkbox value="remember" color="primary" />}
+              label="Recordarme"
+            />
+            <Link href={"/dashboard"} passHref>
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                sx={{ mt: 3, mb: 2 }}
+              >
+                Ingresar
+              </Button>
+            </Link>
+            {/* <Grid container>
+              <Grid item xs>
+                <Link href="#" variant="body2">
+                  Forgot password?
+                </Link>
+              </Grid>
+              <Grid item>
+                <Link href="#" variant="body2">
+                  {"Don't have an account? Sign Up"}
+                </Link>
+              </Grid>
+            </Grid> */}
+          </Box>
+        </Box>
+        <Copyright sx={{ mt: 8, mb: 4 }} />
+      </Container>
+    </ThemeProvider>
   );
 }

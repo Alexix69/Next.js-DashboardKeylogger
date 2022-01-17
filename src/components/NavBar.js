@@ -1,8 +1,7 @@
 import * as React from "react";
 import Link from "next/link";
-import { styled, alpha } from "@mui/material/styles";
+import { alpha, styled } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
@@ -10,13 +9,9 @@ import IconButton from "@mui/material/IconButton";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-import EditIcon from "@mui/icons-material/Edit";
 import Divider from "@mui/material/Divider";
-import ArchiveIcon from "@mui/icons-material/Archive";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
-import FileCopyIcon from "@mui/icons-material/FileCopy";
-import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import { useRouter } from "next/router";
 import { Container, Grid } from "@mui/material";
 
@@ -82,34 +77,27 @@ export default function NavBar() {
             container
             spacing={2}
             alignItems="center"
-            justifyContent="space-between"
+            // justifyContent="space-evenly"
           >
-            <Grid container item lg={4} sm={2}>
-              <Link href={"/"}>
-                <a>
-                  <Typography px={3} variant="h5" component="div">
-                    Keylogger
-                  </Typography>
-                </a>
+            <Grid container item justifyContent="center">
+              <Typography px={3} variant="h5" component="div">
+                <Link href={"/dashboard"}>Keylogger</Link>
+              </Typography>
+              <Link href={"/dashboard"}>
+                <Button color="inherit">Inicio</Button>
               </Link>
-            </Grid>
-            <Grid container item lg={4} sm={10} justifyContent="flex-end">
-              <Button onClick={() => push("/")} color="inherit">
-                Inicio
-              </Button>
-              <Button onClick={() => push("/reports")} color="inherit">
-                Reportes
-              </Button>
-              <Button onClick={() => push("/users")} color="inherit">
-                Usuarios
-              </Button>
-              <Button onClick={() => push("/archived")} color="inherit">
-                Archivado
-              </Button>
-              <Button onClick={() => push("/favorites")} color="inherit">
-                Favoritos
-              </Button>
-
+              <Link href={"/dashboard/clientes"}>
+                <Button color="inherit">Clientes</Button>
+              </Link>
+              <Link href={"/dashboard/reportes"}>
+                <Button color="inherit">Reportes</Button>
+              </Link>
+              <Link href={"/dashboard/archivados"}>
+                <Button color="inherit">Archivados</Button>
+              </Link>
+              <Link href={"/dashboard/favoritos"}>
+                <Button color="inherit">Favoritos</Button>
+              </Link>
               <IconButton
                 size="large"
                 edge="end"
@@ -134,19 +122,24 @@ export default function NavBar() {
                 open={open}
                 onClose={handleClose}
               >
-                <MenuItem onClick={() => push("/profile")} disableRipple>
-                  <AdminPanelSettingsIcon />
-                  Perfil
-                </MenuItem>
+                <Link href={"/profile"}>
+                  <MenuItem onClick={() => push("/profile")} disableRipple>
+                    <AdminPanelSettingsIcon />
+                    Perfil
+                  </MenuItem>
+                </Link>
                 {/* <MenuItem onClick={handleClose} disableRipple>
                   <FileCopyIcon />
                   Duplicate
                 </MenuItem> */}
                 <Divider sx={{ my: 0.5 }} />
-                <MenuItem onClick={handleClose} disableRipple>
-                  <ExitToAppIcon />
-                  Salir
-                </MenuItem>
+                <Link href={"/"}>
+                  <MenuItem onClose={handleClose} disableRipple>
+                    <ExitToAppIcon />
+                    Salir
+                  </MenuItem>
+                </Link>
+
                 {/* <MenuItem onClick={handleClose} disableRipple>
                   <MoreHorizIcon />
                   More

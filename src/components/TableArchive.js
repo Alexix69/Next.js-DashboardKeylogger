@@ -1,18 +1,17 @@
 import React from "react";
-import ReactDOM from "react-dom";
 import MUIDataTable, { ExpandButton } from "mui-datatables";
 import {
+  Paper,
   Table,
   TableBody,
   TableCell,
   TableContainer,
   TableHead,
   TableRow,
-  Paper,
 } from "@mui/material";
 import { ThemeProvider } from "@mui/styles";
 import { createTheme } from "@mui/material/styles";
-import UnarchiveIcon from '@mui/icons-material/Unarchive';
+import UnarchiveIcon from "@mui/icons-material/Unarchive";
 
 class TableArchive extends React.Component {
   render() {
@@ -221,7 +220,9 @@ class TableArchive extends React.Component {
               <Table aria-label="simple table">
                 <TableHead>
                   <TableRow>
-                    <TableCell align="right">Tipo de evento: {JSON.stringify(rowData[4])}</TableCell>
+                    <TableCell align="right">
+                      Tipo de evento: {JSON.stringify(rowData[4])}
+                    </TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -232,7 +233,7 @@ class TableArchive extends React.Component {
                   </TableRow>
                   <TableRow>
                     <TableCell align="center" component="th" scope="row">
-                      <UnarchiveIcon/> <p>Desarchivar este registro</p>
+                      <UnarchiveIcon /> <p>Desarchivar este registro</p>
                     </TableCell>
                   </TableRow>
                 </TableBody>

@@ -1,12 +1,5 @@
 import React from "react";
-import {
-  Container,
-  Grid,
-  Form,
-  TextField,
-  Typography,
-  Button,
-} from "@mui/material";
+import { Button, Container, Grid, TextField, Typography } from "@mui/material";
 import Layout from "../components/Layout";
 
 const Profile = () => {

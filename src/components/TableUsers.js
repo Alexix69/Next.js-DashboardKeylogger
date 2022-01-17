@@ -1,14 +1,13 @@
 import React from "react";
-import ReactDOM from "react-dom";
 import MUIDataTable, { ExpandButton } from "mui-datatables";
 import {
+  Paper,
   Table,
   TableBody,
   TableCell,
   TableContainer,
   TableHead,
   TableRow,
-  Paper,
 } from "@mui/material";
 import { ThemeProvider } from "@mui/styles";
 import { createTheme } from "@mui/material/styles";
@@ -60,7 +59,7 @@ class TableUsers extends React.Component {
           display: false,
           filter: false,
         },
-      }
+      },
     ];
 
     const data = [
