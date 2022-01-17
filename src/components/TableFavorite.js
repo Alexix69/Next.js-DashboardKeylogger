@@ -1,20 +1,18 @@
 import React from "react";
-import ReactDOM from "react-dom";
 import MUIDataTable, { ExpandButton } from "mui-datatables";
 import {
+  Paper,
   Table,
   TableBody,
   TableCell,
   TableContainer,
   TableHead,
   TableRow,
-  Paper,
 } from "@mui/material";
 import { ThemeProvider } from "@mui/styles";
 import { createTheme } from "@mui/material/styles";
-import StarIcon from '@mui/icons-material/Star';
-import StarBorderIcon from '@mui/icons-material/StarBorder';
-import ArchiveIcon from '@mui/icons-material/Archive';
+import StarIcon from "@mui/icons-material/Star";
+import ArchiveIcon from "@mui/icons-material/Archive";
 
 class TableFavorite extends React.Component {
   render() {
@@ -223,7 +221,9 @@ class TableFavorite extends React.Component {
               <Table aria-label="simple table">
                 <TableHead>
                   <TableRow>
-                    <TableCell align="right">Tipo de evento: {JSON.stringify(rowData[4])}</TableCell>
+                    <TableCell align="right">
+                      Tipo de evento: {JSON.stringify(rowData[4])}
+                    </TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -235,7 +235,7 @@ class TableFavorite extends React.Component {
                   <TableRow>
                     <TableCell align="center" component="th" scope="row">
                       <StarIcon />
-                      <ArchiveIcon/>
+                      <ArchiveIcon />
                     </TableCell>
                   </TableRow>
                 </TableBody>

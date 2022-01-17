@@ -1,20 +1,19 @@
 import React from "react";
-import ReactDOM from "react-dom";
 import MUIDataTable, { ExpandButton } from "mui-datatables";
 import {
+  Paper,
   Table,
   TableBody,
   TableCell,
   TableContainer,
   TableHead,
   TableRow,
-  Paper,
 } from "@mui/material";
 import { ThemeProvider } from "@mui/styles";
 import { createTheme } from "@mui/material/styles";
-import StarIcon from '@mui/icons-material/Star';
-import StarBorderIcon from '@mui/icons-material/StarBorder';
-import ArchiveIcon from '@mui/icons-material/Archive';
+import StarIcon from "@mui/icons-material/Star";
+import StarBorderIcon from "@mui/icons-material/StarBorder";
+import ArchiveIcon from "@mui/icons-material/Archive";
 
 class TableReports extends React.Component {
   render() {
@@ -53,7 +52,7 @@ class TableReports extends React.Component {
         name: "Valor",
         options: {
           searchable: true,
-          display: false,
+          display: true,
           filter: true,
         },
       },
@@ -66,6 +65,7 @@ class TableReports extends React.Component {
         "Attorney",
         "Jaden Collins",
         "Keystrokes",
+        "contenido",
         "Teclas Presionadas....................",
       ],
       [
@@ -155,6 +155,7 @@ class TableReports extends React.Component {
         "Jaden Collins",
         "Keystrokes",
         "Teclas Presionadas....................",
+        "contenido",
       ],
       [
         "2021-12-15",
@@ -216,27 +217,29 @@ class TableReports extends React.Component {
       expandableRowsOnClick: true,
       renderExpandableRow: (rowData, rowMeta) => {
         console.log("RowData", rowData);
-        console.log("RowMeta", rowMeta);
+        //console.log("RowMeta", rowMeta);
         return (
-          <TableCell colSpan={6}>
+          <TableCell colSpan={7}>
             <TableContainer component={Paper}>
               <Table aria-label="simple table">
                 <TableHead>
                   <TableRow>
-                    <TableCell align="right">Tipo de evento: {JSON.stringify(rowData[4])}</TableCell>
+                    <TableCell align="right">
+                      Tipo de evento: {JSON.stringify(rowData[6])}
+                    </TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
                   <TableRow>
                     <TableCell component="th" scope="row">
-                      {JSON.stringify(rowData[5])}
+                      {JSON.stringify(rowData[6])}
                     </TableCell>
                   </TableRow>
                   <TableRow>
                     <TableCell align="center" component="th" scope="row">
                       <StarIcon />
-                      <StarBorderIcon/>
-                      <ArchiveIcon/>
+                      <StarBorderIcon />
+                      <ArchiveIcon />
                     </TableCell>
                   </TableRow>
                 </TableBody>
