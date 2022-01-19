@@ -4,6 +4,7 @@ import Layout from "../../components/Layout";
 import ClientsTable from "../../components/ClientsTable";
 import useSWR from "swr";
 import ReportsTable from "../../components/ReportsTable";
+import withAuth from "../../hocs/withAuth";
 
 const Clients = () => {
   const fetcher = (url) => fetch(url).then((res) => res.json());
@@ -27,4 +28,4 @@ const Clients = () => {
   );
 };
 
-export default Clients;
+export default withAuth(Clients);

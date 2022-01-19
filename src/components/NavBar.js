@@ -14,6 +14,7 @@ import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 import { useRouter } from "next/router";
 import { Container, Grid } from "@mui/material";
+import { useAuth } from "../contexts/auth";
 
 const StyledMenu = styled((props) => (
   <Menu
@@ -59,6 +60,7 @@ const StyledMenu = styled((props) => (
 }));
 
 export default function NavBar() {
+  const { user, logout } = useAuth();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const { push } = useRouter();
   const open = Boolean(anchorEl);
@@ -67,6 +69,10 @@ export default function NavBar() {
   };
   const handleClose = () => {
     setAnchorEl(null);
+  };
+
+  const handleLogout = () => {
+    logout();
   };
 
   return (
@@ -98,11 +104,12 @@ export default function NavBar() {
               <Link href={"/dashboard/favoritos"}>
                 <Button color="inherit">Favoritos</Button>
               </Link>
+              {/*<div>{!!user ? user.role : "sin usuario"}</div>*/}
               <IconButton
                 size="large"
                 edge="end"
                 color="inherit"
-                aria-label="menu"
+                aria-label="Usuairo"
                 sx={{ mr: 2 }}
                 id="demo-customized-button"
                 aria-controls="demo-customized-menu"
@@ -111,6 +118,7 @@ export default function NavBar() {
                 variant="contained"
                 onClick={handleClick}
               >
+                {!!user ? user.nickname : "sin usuario"}
                 <KeyboardArrowDownIcon />
               </IconButton>
               <StyledMenu
@@ -133,13 +141,16 @@ export default function NavBar() {
                   Duplicate
                 </MenuItem> */}
                 <Divider sx={{ my: 0.5 }} />
-                <Link href={"/"}>
-                  <MenuItem onClose={handleClose} disableRipple>
-                    <ExitToAppIcon />
-                    Salir
-                  </MenuItem>
-                </Link>
-
+                {/*<Link href={"/"}>*/}
+                <MenuItem
+                  onClose={handleClose}
+                  disableRipple
+                  onClick={handleLogout}
+                >
+                  <ExitToAppIcon />
+                  Salir
+                </MenuItem>
+                {/*</Link>*/}
                 {/* <MenuItem onClick={handleClose} disableRipple>
                   <MoreHorizIcon />
                   More

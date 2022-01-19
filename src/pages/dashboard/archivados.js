@@ -3,6 +3,7 @@ import { Container, Grid } from "@mui/material";
 import Layout from "../../components/Layout";
 import ArchivedTable from "../../components/ArchivedTable";
 import useSWR from "swr";
+import withAuth from "../../hocs/withAuth";
 
 const Archived = () => {
   const fetcher = (url) => fetch(url).then((res) => res.json());
@@ -33,4 +34,4 @@ const Archived = () => {
   );
 };
 
-export default Archived;
+export default withAuth(Archived);

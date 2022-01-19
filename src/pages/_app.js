@@ -1,5 +1,6 @@
 import "../styles/globals.css";
 import Head from "next/head";
+import { AuthProvider } from "../contexts/auth";
 
 function MyApp({ Component, pageProps }) {
   return (
@@ -8,7 +9,9 @@ function MyApp({ Component, pageProps }) {
         <title>Dashboard Keylogger</title>
         <meta name="viewport" content="Dashboard Keylogger" />
       </Head>
-      <Component {...pageProps} />
+      <AuthProvider>
+        <Component {...pageProps} />
+      </AuthProvider>
     </>
   );
 }
