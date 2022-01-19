@@ -5,6 +5,7 @@ import { Input } from "antd";
 import { useEffect, useState } from "react";
 import Report from "../../api/report";
 import useSWR from "swr";
+import withAuth from "../../hocs/withAuth";
 
 const Reports = () => {
   const [input, setInput] = useState("");
@@ -95,4 +96,4 @@ const Reports = () => {
   );
 };
 
-export default Reports;
+export default withAuth(Reports);

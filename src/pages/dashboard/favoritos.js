@@ -4,6 +4,7 @@ import Layout from "../../components/Layout";
 import FavoritesTable from "../../components/FavoritesTable";
 import useSWR from "swr";
 import SelectFavManager from "../../components/SelectFavManager";
+import withAuth from "../../hocs/withAuth";
 
 const Favorites = () => {
   // const fetcher = (url) => fetch(url).then((res) => res.json());
@@ -78,4 +79,4 @@ const Favorites = () => {
   );
 };
 
-export default Favorites;
+export default withAuth(Favorites);
