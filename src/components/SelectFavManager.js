@@ -20,10 +20,10 @@ const SelectFavManager = ({
   // console.log("EJECUCION ...");
   const { data, error } = useSWR(
     `${process.env.NEXT_PUBLIC_API_BASE_URL}/favorite_categories`,
-    fetcher,
-    {
-      refreshInterval: 5000,
-    }
+    fetcher
+    // {
+    //   refreshInterval: 5000,
+    // }
   );
   //console.log("DATA", data);
   // console.log("... de SWR");

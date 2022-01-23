@@ -36,10 +36,10 @@ const Reports = () => {
 
   const { data, error } = useSWR(
     `${process.env.NEXT_PUBLIC_API_BASE_URL}/records`,
-    fetcher,
-    {
-      refreshInterval: 30000,
-    }
+    fetcher
+    // {
+    //   refreshInterval: 30000,
+    // }
   );
 
   // useEffect(() => {
