@@ -5,10 +5,10 @@ import { AuthProvider } from "../contexts/auth";
 function MyApp({ Component, pageProps }) {
   return (
     <>
-      <Head>
-        <title>Dashboard Keylogger</title>
-        <meta name="viewport" content="Dashboard Keylogger" />
-      </Head>
+      {/*<Head>*/}
+      {/*  <title>Dashboard Keylogger</title>*/}
+      {/*  <meta name="viewport" content="Dashboard Keylogger" />*/}
+      {/*</Head>*/}
       <AuthProvider>
         <Component {...pageProps} />
       </AuthProvider>
