@@ -20,7 +20,8 @@ import Report from "../api/report";
 import AlertDialogSlide from "./FavCategModal";
 import FavCategModal from "./FavCategModal";
 
-const ReportsTable = ({ indexToShow, data, totalRecords }) => {
+// indexToShow,
+const ReportsTable = ({ data, totalRecords, indexToShow }) => {
   // const fetcher = (url) =>
   //   api
   //     .get(url, {
@@ -289,7 +290,7 @@ const ReportsTable = ({ indexToShow, data, totalRecords }) => {
     },
     onRowExpansionChange: (curExpanded, allExpanded, rowsExpanded) => {
       // console.log("ROWS EXPANDED", curExpanded, allExpanded, rowsExpanded);
-      console.log("INDIXE DE EXPANDIDAD", rowsExpanded);
+      console.log("INDIXE DE EXPANDIDAD", curExpanded);
     },
   };
 
@@ -316,7 +317,6 @@ const ReportsTable = ({ indexToShow, data, totalRecords }) => {
         <MUIDataTable
           title={`Registros totales: ${totalRecords}, en esta tabla: ${columnsDef.length}`}
           data={columnsDef}
-          //data={indexToShow}
           columns={columns}
           options={options}
           components={components}

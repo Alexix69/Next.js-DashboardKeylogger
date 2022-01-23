@@ -8,6 +8,7 @@ import useSWR from "swr";
 import ScreenshotsChartPie from "../../components/ScreenshotsChartPie";
 import WebsitesChartPie from "../../components/WebsitesChartPie";
 import withAuth from "../../hocs/withAuth";
+import Head from "next/head";
 
 const Index = () => {
   const fetcher = (url) => fetch(url).then((res) => res.json());
@@ -79,74 +80,103 @@ const Index = () => {
   }
 
   return (
-    <Layout>
-      <Grid
-        marginTop={10}
-        container
-        direction="column"
-        alignItems="center"
-        justifyContent="center"
-      >
+    <>
+      <Head>
+        <title>Dashboard</title>
+      </Head>
+      <Layout>
         <Grid
+          marginTop={10}
           container
-          direction="row"
+          direction="column"
           alignItems="center"
           justifyContent="center"
         >
-          <Grid item xs={4} sm={2} alignItems="center" justifyContent="center">
-            <Grid>
-              {!!data ? (
-                <DonutChart clients={data} colors={colors} />
-              ) : (
-                <p>Cargando...</p>
-              )}
+          <Grid
+            container
+            direction="row"
+            alignItems="center"
+            justifyContent="center"
+          >
+            <Grid
+              item
+              xs={4}
+              sm={2}
+              alignItems="center"
+              justifyContent="center"
+            >
+              <Grid>
+                {!!data ? (
+                  <DonutChart clients={data} colors={colors} />
+                ) : (
+                  <p>Cargando...</p>
+                )}
+              </Grid>
+              <Grid paddingY={1}>
+                <Typography align="center">{`${total_records} Registros en total`}</Typography>
+              </Grid>
             </Grid>
-            <Grid paddingY={1}>
-              <Typography align="center">{`${total_records} Registros en total`}</Typography>
+            <Grid
+              item
+              xs={4}
+              sm={2}
+              alignItems="center"
+              justifyContent="center"
+            >
+              <Grid>
+                <KeystrokesChartPie
+                  clients={data}
+                  colors={colors}
+                  borderColors={borderColors}
+                />
+              </Grid>
+              <Grid paddingY={1}>
+                <Typography align="center">{`${total_keystrokes} Keystrokes`}</Typography>
+              </Grid>
+            </Grid>
+            <Grid
+              item
+              xs={4}
+              sm={2}
+              alignItems="center"
+              justifyContent="center"
+            >
+              <Grid>
+                <ScreenshotsChartPie
+                  clients={data}
+                  colors={colors}
+                  borderColors={borderColors}
+                />
+              </Grid>
+              <Grid paddingY={1}>
+                <Typography align="center">{`${total_screenshots} Screenshots`}</Typography>
+              </Grid>
+            </Grid>
+            <Grid
+              item
+              xs={4}
+              sm={2}
+              alignItems="center"
+              justifyContent="center"
+            >
+              <Grid>
+                <WebsitesChartPie
+                  clients={data}
+                  colors={colors}
+                  borderColors={borderColors}
+                />
+              </Grid>
+              <Grid paddingY={1}>
+                <Typography align="center">{`${total_websites} Websites`}</Typography>
+              </Grid>
             </Grid>
           </Grid>
-          <Grid item xs={4} sm={2} alignItems="center" justifyContent="center">
-            <Grid>
-              <KeystrokesChartPie
-                clients={data}
-                colors={colors}
-                borderColors={borderColors}
-              />
-            </Grid>
-            <Grid paddingY={1}>
-              <Typography align="center">{`${total_keystrokes} Keystrokes`}</Typography>
-            </Grid>
-          </Grid>
-          <Grid item xs={4} sm={2} alignItems="center" justifyContent="center">
-            <Grid>
-              <ScreenshotsChartPie
-                clients={data}
-                colors={colors}
-                borderColors={borderColors}
-              />
-            </Grid>
-            <Grid paddingY={1}>
-              <Typography align="center">{`${total_screenshots} Screenshots`}</Typography>
-            </Grid>
-          </Grid>
-          <Grid item xs={4} sm={2} alignItems="center" justifyContent="center">
-            <Grid>
-              <WebsitesChartPie
-                clients={data}
-                colors={colors}
-                borderColors={borderColors}
-              />
-            </Grid>
-            <Grid paddingY={1}>
-              <Typography align="center">{`${total_websites} Websites`}</Typography>
-            </Grid>
+          <Grid item xs={8} md={14} width={850} marginTop={3}>
+            {!!data ? <ClientsTable data={data} /> : <p>Cargando datos ...</p>}
           </Grid>
         </Grid>
-        <Grid item xs={8} md={14} width={850} marginTop={3}>
-          {!!data ? <ClientsTable data={data} /> : <p>Cargando datos ...</p>}
-        </Grid>
-      </Grid>
-    </Layout>
+      </Layout>
+    </>
   );
 };
 

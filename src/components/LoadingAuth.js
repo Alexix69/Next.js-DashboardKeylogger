@@ -1,7 +1,7 @@
 import React from "react";
 
 const LoadingAuth = () => {
-  return <div>Verificando ...</div>;
+  return <p>Verificando ...</p>;
 };
 
 export default LoadingAuth;

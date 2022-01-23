@@ -6,34 +6,52 @@ import { useEffect, useState } from "react";
 import Report from "../../api/report";
 import useSWR from "swr";
 import withAuth from "../../hocs/withAuth";
+import api from "../../api";
+import SearchInput from "../../components/SearchInput";
+import Head from "next/head";
+import * as React from "react";
 
 const Reports = () => {
-  const [input, setInput] = useState("");
-  const [reports, setReports] = useState([]);
-  const [search, setSearch] = useState([]);
+  const [matchingReports, setMatchingReports] = useState([]);
   const [indexToShow, setIndexToShow] = useState([]);
 
-  const fetcher = (url) => fetch(url).then((res) => res.json());
-  //const fetcher = (url) => axios.get(url).then((res) => res.data);
+  const setFound = (reports) => {
+    setMatchingReports(reports);
+  };
+
+  const setToShow = (array) => {
+    setIndexToShow(array);
+  };
+
+  useEffect(() => {
+    console.log("MATCHING REPORTS IN REPOTES", matchingReports);
+  }, [matchingReports]);
+  // const [input, setInput] = useState("");
+  // const [reports, setReports] = useState([]);
+  // const [search, setSearch] = useState([]);
+  // const [indexToShow, setIndexToShow] = useState([]);
+
+  // const fetcher = (url) => fetch(url).then((res) => res.json());
+  const fetcher = (url) => api.get(url).then((res) => res.data);
 
   const { data, error } = useSWR(
     `${process.env.NEXT_PUBLIC_API_BASE_URL}/records`,
     fetcher,
     {
-      refreshInterval: 5000,
+      refreshInterval: 30000,
     }
   );
 
-  useEffect(() => {
-    //getData();
-    //setInput(search);
-
-    // return () => {
-    //   setSearch("");
-    // };
-
-    console.log("SETSEARCH", search);
-  }, [search]);
+  // useEffect(() => {
+  //   //getData();
+  //   //setInput(search);
+  //
+  //   // return () => {
+  //   //   setSearch("");
+  //   // };
+  //
+  //   console.log("SETSEARCH", search);
+  // }, [search]);
 
   // useEffect(() => {
   //   if (!!reports && input.length > 3) {
@@ -64,35 +82,54 @@ const Reports = () => {
   //   }
   // };
 
-  // console.log("VALOR DE INPUT", input);
-  // console.log("VALOR DE REPORTS", reports);
-  // console.log("VALOR DE SEARCH", search);
-  // console.log("VALOR DE INDETOSHOW", indexToShow);
-
   return (
-    <Layout>
-      <Container>
-        <Grid marginTop={10}>
-          <Input
-            placeholder="Ingrese una palabra"
-            onPressEnter={(e) =>
-              setSearch((prevState) => {
-                return [e.target.value];
-              })
-            }
-          />
-          {!!data ? (
-            <ReportsTable
-              indexToShow={search}
-              data={data.data}
-              totalRecords={data.all_records}
-            />
-          ) : (
-            <p> Cargando datos ...</p>
-          )}
-        </Grid>
-      </Container>
-    </Layout>
+    <>
+      <Head>
+        <title>Todos los registros</title>
+      </Head>
+
+      <Layout>
+        <Container>
+          <Grid marginTop={9}>
+            {/*<Input*/}
+            {/*  placeholder="Ingrese una palabra"*/}
+            {/*  onPressEnter={(e) =>*/}
+            {/*    setSearch((prevState) => {*/}
+            {/*      return [e.target.value];*/}
+            {/*    })*/}
+            {/*  }*/}
+            {/*/>*/}
+            <Grid item marginBottom={2}>
+              <SearchInput
+                setReports={setFound}
+                matchingReports={matchingReports}
+                setIndexToShow={setToShow}
+              />
+            </Grid>
+            <Grid item>
+              {!!data ? (
+                <ReportsTable
+                  // indexToShow={search}
+                  indexToShow={!!indexToShow.length > 0 ? indexToShow : []}
+                  data={
+                    matchingReports.length > 0 ? matchingReports : data.data
+                  }
+                  totalRecords={data.all_records}
+                />
+              ) : (
+                // ) : !!matchingReports ? (
+                //   <ReportsTable
+                //     // indexToShow={search}
+                //     data={matchingReports}
+                //     // totalRecords={data.all_records}
+                //   />
+                <p> Cargando datos ...</p>
+              )}
+            </Grid>
+          </Grid>
+        </Container>
+      </Layout>
+    </>
   );
 };
 

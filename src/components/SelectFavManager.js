@@ -7,7 +7,7 @@ import Select from "@mui/material/Select";
 import useSWR from "swr";
 import { useEffect, useState } from "react";
 import Divider from "@mui/material/Divider";
-import { Chip } from "@mui/material";
+import { Chip, Grid } from "@mui/material";
 import Report from "../api/report";
 import FavoriteCategory from "../api/favorite_category";
 
@@ -74,7 +74,7 @@ const SelectFavManager = ({
   }, [selectedItemId, updateConfirmation]);
 
   return (
-    <>
+    <Grid container direction="row" justifyContent="center" alignItems="center">
       <FormControl sx={{ m: 1, minWidth: 100 }}>
         <InputLabel id="demo-simple-select-autowidth-label">
           Ver favoritos
@@ -123,7 +123,7 @@ const SelectFavManager = ({
           {/*<MenuItem value={22}>Twenty one and a half</MenuItem>*/}
         </Select>
       </FormControl>
-    </>
+    </Grid>
   );
 };
 
