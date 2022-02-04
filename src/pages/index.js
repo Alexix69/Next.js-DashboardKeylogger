@@ -15,6 +15,8 @@ import { useRouter } from "next/router";
 import LoginForm from "../components/LoginForm";
 import withoutAuth from "../hocs/withoutAuth";
 import Head from "next/head";
+import { Alert, AlertTitle, Slide } from "@mui/material";
+import { useState } from "react";
 
 function Copyright(props) {
   const { push } = useRouter();
@@ -124,15 +126,28 @@ const theme = createTheme();
 // }
 
 const Index = () => {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    // eslint-disable-next-line no-console
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+  // const handleSubmit = (event) => {
+  //   event.preventDefault();
+  //   const data = new FormData(event.currentTarget);
+  //   // eslint-disable-next-line no-console
+  //   console.log({
+  //     email: data.get("email"),
+  //     password: data.get("password"),
+  //   });
+  // };
+  const [alertState, setAlertState] = useState(false);
+  const setAlertStateAuth = (value) => {
+    setAlertState(value);
   };
+
+  const icon = (
+    <Alert variant="outlined" severity="error">
+      Combinación de usuario y contraseña incorrecta.
+    </Alert>
+    // <Alert variant="filled" severity="error">
+    //   This is an error alert — check it out!
+    // </Alert>
+  );
 
   return (
     <>
@@ -142,6 +157,7 @@ const Index = () => {
       <ThemeProvider theme={theme}>
         <Container component="main" maxWidth="xs">
           <CssBaseline />
+
           <Box
             sx={{
               marginTop: 8,
@@ -150,6 +166,22 @@ const Index = () => {
               alignItems: "center",
             }}
           >
+            {/*<Alert severity="error">*/}
+            {/*  <AlertTitle>No se pudo iniciar sesión</AlertTitle>*/}
+            {/*  /!*This is an error alert — <strong>check it out!</strong>*!/*/}
+            {/*  La combinación de correo y contraseña es incorrecta!*/}
+            {/*</Alert>*/}
+            {!!alertState ? (
+              <Slide
+                direction="down"
+                in={alertState}
+                timeout={500}
+                // container={containerRef.current}
+              >
+                {icon}
+              </Slide>
+            ) : null}
+
             <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
               <LockOutlinedIcon />
             </Avatar>
@@ -209,7 +241,7 @@ const Index = () => {
             {/*    </Grid>*/}
             {/*  </Grid> *!/*/}
             {/*</Box>*/}
-            <LoginForm />
+            <LoginForm setAlertState={setAlertStateAuth} />
           </Box>
           <Copyright sx={{ mt: 8, mb: 4 }} />
         </Container>

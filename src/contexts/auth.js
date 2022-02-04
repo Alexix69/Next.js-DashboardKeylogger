@@ -1,5 +1,7 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import cookie from "js-cookie";
+import translateMessage from "../constants/messages";
+
 // import translateMessage from "../constants/messages";
 import User from "../api/user";
 // import PropTypes from "prop-types";
@@ -79,16 +81,20 @@ function useAuthProvider() {
       handleUser(response.data.user);
       // let idToken = response.data.token;
       // console.log("Token: ", idToken);
-      // localStorage.setItem("id_token", idToken);
+      //
+
       return response;
     } catch (error) {
       if (error.response) {
         // The request was made and the server responded with a status code
         // that falls out of the range of 2xx
         // alert(translateMessage(error.response.data.message));
-        console.log(error.response.data);
-        console.log(error.response.status);
-        console.log(error.response.headers);
+        // alert(translateMessage(error.response.data.message));
+        // alert(error.response);
+        // alert(translateMessage(error.response.data));
+        console.log("error.response.data en auth", error.response.data);
+        console.log("error.response.status en auth", error.response.status);
+        console.log("error.response.headers en auth", error.response.headers);
         return error.response;
       } else if (error.request) {
         // The request was made but no response was received
@@ -169,10 +175,7 @@ function useAuthProvider() {
 
   return {
     user,
-    // register,
     login,
     logout,
-    // sendPasswordResetEmail,
-    // confirmPasswordReset,
   };
 }
