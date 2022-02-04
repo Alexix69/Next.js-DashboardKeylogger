@@ -130,17 +130,17 @@ export default function NavBar() {
                 open={open}
                 onClose={handleClose}
               >
-                <Link href={"/profile"}>
-                  <MenuItem onClick={() => push("/profile")} disableRipple>
-                    <AdminPanelSettingsIcon />
-                    Perfil
-                  </MenuItem>
-                </Link>
-                {/* <MenuItem onClick={handleClose} disableRipple>
-                  <FileCopyIcon />
-                  Duplicate
-                </MenuItem> */}
-                <Divider sx={{ my: 0.5 }} />
+                {/*<Link href={"/profile"}>*/}
+                {/*  <MenuItem onClick={() => push("/profile")} disableRipple>*/}
+                {/*    <AdminPanelSettingsIcon />*/}
+                {/*    Perfil*/}
+                {/*  </MenuItem>*/}
+                {/*</Link>*/}
+                {/*/!* <MenuItem onClick={handleClose} disableRipple>*/}
+                {/*  <FileCopyIcon />*/}
+                {/*  Duplicate*/}
+                {/*</MenuItem> *!/*/}
+                {/*<Divider sx={{ my: 0.5 }} />*/}
                 {/*<Link href={"/"}>*/}
                 <MenuItem
                   onClose={handleClose}

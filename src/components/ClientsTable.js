@@ -132,6 +132,12 @@ const ClientsTable = ({ data }) => {
   ];
 
   const options = {
+    download: false,
+    elevation: 7,
+    print: false,
+    viewColumns: false,
+    rowsPerPageOptions: [10],
+    searchPlaceholder: "cliente, nombre computador, fecha",
     filter: true,
     filterType: "dropdown",
     responsive: "standard",

@@ -1,4 +1,4 @@
-import { Container, Grid } from "@mui/material";
+import { Alert, Container, Grid } from "@mui/material";
 import Layout from "../../components/Layout";
 import ReportsTable from "../../components/ReportsTable";
 import { Input } from "antd";
@@ -106,6 +106,7 @@ const Reports = () => {
                 setIndexToShow={setToShow}
               />
             </Grid>
+
             <Grid item>
               {!!data ? (
                 <ReportsTable

@@ -7,8 +7,20 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import User from "../api/user";
 import { useAuth } from "../contexts/auth";
 import { useRouter } from "next/router";
+import * as yup from "yup";
+import { string } from "yup";
+import { Alert } from "@mui/material";
 
-const LoginForm = () => {
+const schema = yup
+  .object()
+  .shape({
+    email: string()
+      .email("Ingrese un correo válido")
+      .required("Este campo debe ser completado"),
+    password: string().required("Este campo debe ser completado"),
+  })
+  .required();
+const LoginForm = ({ setAlertState }) => {
   const { login } = useAuth();
   // const [respLogin, setRespLogin] = useState("");
   const {
@@ -21,8 +33,10 @@ const LoginForm = () => {
     //     folder_name: "",
     //     description: "",
     // },
-    // resolver: yupResolver(schema),
+    resolver: yupResolver(schema),
   });
+  const [result, setResult] = useState("");
+  const [errorsList, setErrorsList] = useState([]);
 
   const onFinishLog = async (data) => {
     try {
@@ -30,11 +44,22 @@ const LoginForm = () => {
         ...data,
       };
       const response = await login(userData);
-      console.log("REPSONSE LOGIN", response);
+      console.log("REPSONSE LOGIN .data", response.data);
+      if (response.data?.error) {
+        setAlertState(true);
+        setTimeout(() => {
+          setAlertState(false);
+        }, 5000);
+      }
+
+      if (response.data?.user) {
+        setAlertState(false);
+      }
+      // setResult("Usuario logueado");
     } catch (e) {
       const { response } = e;
 
-      if (response) {
+      if (!!response) {
         if (response.data.errors) {
           const errors = response.data.errors;
           const newErrorList = [];
@@ -42,14 +67,19 @@ const LoginForm = () => {
           for (let field in errors) {
             newErrorList.push(...errors[field]);
           }
+          // setErrorsList(newErrorList);
         }
       }
     }
   };
 
-  // useEffect(() => {
-  //   console.log("RESPUETSA", respLogin);
-  // }, [respLogin]);
+  useEffect(() => {
+    console.log("RESULT", result);
+  }, [result]);
+
+  useEffect(() => {
+    console.log("errorList", errorsList);
+  }, [errorsList]);
 
   return (
     <>
@@ -76,6 +106,7 @@ const LoginForm = () => {
             />
           )}
         />
+        {!!errors.email ? <>{errors.email?.message}</> : null}
         <Controller
           name="password"
           control={control}
@@ -94,6 +125,7 @@ const LoginForm = () => {
             />
           )}
         />
+        {!!errors.password ? <>{errors.password?.message}</> : null}
         <Button
           type="submit"
           fullWidth
