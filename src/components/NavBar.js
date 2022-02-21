@@ -15,6 +15,7 @@ import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 import { useRouter } from "next/router";
 import { Container, Grid } from "@mui/material";
 import { useAuth } from "../contexts/auth";
+import { useState } from "react";
 
 const StyledMenu = styled((props) => (
   <Menu
@@ -61,8 +62,8 @@ const StyledMenu = styled((props) => (
 
 export default function NavBar() {
   const { user, logout } = useAuth();
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const { push } = useRouter();
+  const [anchorEl, setAnchorEl] = useState(null);
+  // const { push } = useRouter();
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -81,14 +82,17 @@ export default function NavBar() {
         <Toolbar>
           <Grid
             container
-            spacing={2}
+            // spacing={8}
             alignItems="center"
-            // justifyContent="space-evenly"
+            justifyContent="space-around"
+            direction="row"
           >
-            <Grid container item justifyContent="center">
-              <Typography px={3} variant="h5" component="div">
-                <Link href={"/dashboard"}>Keylogger</Link>
+            <Grid item marginY={0} paddingY={0}>
+              <Typography variant="h4" component="div">
+                <Link href={"/dashboard"}>SpyKey</Link>
               </Typography>
+            </Grid>
+            <Grid item marginY={0} paddingY={0}>
               <Link href={"/dashboard"}>
                 <Button color="inherit">Inicio</Button>
               </Link>
@@ -105,20 +109,22 @@ export default function NavBar() {
                 <Button color="inherit">Favoritos</Button>
               </Link>
               {/*<div>{!!user ? user.role : "sin usuario"}</div>*/}
+            </Grid>
+            <Grid item marginY={0} paddingY={0}>
               <IconButton
-                size="large"
-                edge="end"
+                size="small"
+                // edge="end"
                 color="inherit"
-                aria-label="Usuairo"
-                sx={{ mr: 2 }}
+                aria-label="Usuario"
+                // sx={{ mr: 2 }}
                 id="demo-customized-button"
                 aria-controls="demo-customized-menu"
-                aria-haspopup="true"
+                // aria-haspopup="true"
                 aria-expanded={open ? "true" : undefined}
-                variant="contained"
+                // variant="contained"
                 onClick={handleClick}
               >
-                {!!user ? user.nickname : "sin usuario"}
+                {!!user ? user.role : "sin usuario"}
                 <KeyboardArrowDownIcon />
               </IconButton>
               <StyledMenu
@@ -130,31 +136,14 @@ export default function NavBar() {
                 open={open}
                 onClose={handleClose}
               >
-                {/*<Link href={"/profile"}>*/}
-                {/*  <MenuItem onClick={() => push("/profile")} disableRipple>*/}
-                {/*    <AdminPanelSettingsIcon />*/}
-                {/*    Perfil*/}
-                {/*  </MenuItem>*/}
-                {/*</Link>*/}
-                {/*/!* <MenuItem onClick={handleClose} disableRipple>*/}
-                {/*  <FileCopyIcon />*/}
-                {/*  Duplicate*/}
-                {/*</MenuItem> *!/*/}
-                {/*<Divider sx={{ my: 0.5 }} />*/}
-                {/*<Link href={"/"}>*/}
                 <MenuItem
-                  onClose={handleClose}
-                  disableRipple
+                  // onClose={handleClose}
+                  // disableRipple
                   onClick={handleLogout}
                 >
                   <ExitToAppIcon />
                   Salir
                 </MenuItem>
-                {/*</Link>*/}
-                {/* <MenuItem onClick={handleClose} disableRipple>
-                  <MoreHorizIcon />
-                  More
-                </MenuItem> */}
               </StyledMenu>
             </Grid>
           </Grid>

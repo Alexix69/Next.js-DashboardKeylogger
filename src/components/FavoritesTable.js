@@ -65,8 +65,8 @@ const FavoritesTable = ({ data, requestUpdate, selectedItemIndex }) => {
         // record.event_type,
         record.type,
         record.content,
-        record.client.nickname,
-        record.client.desktop_name,
+        record.client_nickname,
+        record.client_desktop_name,
         record.id,
       ];
       cellData.push(auxArray);

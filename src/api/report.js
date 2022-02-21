@@ -21,6 +21,10 @@ const Report = {
   favorites: () => {
     return api.get("/records/favorites");
   },
+
+  getReportContent: (id) => {
+    return api.get(`records/${id}/content`);
+  },
 };
 
 export default Report;
